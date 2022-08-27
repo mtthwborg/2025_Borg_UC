@@ -1,46 +1,9 @@
 
 
-#################################################
-### Create sample dataset
-##################################################
-
-set.seed(3)
-dates <- rep(seq(as_date("2005-07-01"), as_date("2018-06-30"), 1),each=6)
-ldates <- length(dates)
-claims <- data.table(
-  Date = dates,
-  City = rep(c('Brisbane','Brisbane','Melbourne','Melbourne','Sydney','Sydney'),ldates),
-  outin = rep(c('Indoors','Outdoors'),ldates*3),
-  no.claims = c(rpois(ldates,60), rpois(ldates,25), rpois(ldates,60), rpois(ldates,22), rpois(ldates,145), rpois(ldates,50)),
-  no.claims = c(rtweedie(ldates,60), rtweedie(ldates,25), rtweedie(ldates,60), rpois(ldates,22), rpois(ldates,145), rpois(ldates,50)),
-)
-# Means and dispersion p
-
-
-daily[City %in% c('Brisbane','Melbourne','Sydney'), summary(.SD), by=mget(by.vars3), .SDcols = 'no.claims']
-
-
-# OI refers to occupational illness, IO refers to indoor/outdoor
-
 # Percentile values
 predper <- c(seq(0,1,0.1),2,2.5,3:33,100/3,34:66,200/3,67:97,97.5,98,seq(99,100,0.1)) # percentiles (%). 100/3 and 200/3 work even without rounding
 predper.short <- c(1,2.5,10,25,50,75,90,97.5,99) # c(1,10,90,99) # percentiles to report RRs for
-rTweedie(ldates,60, 1.5)
-rtweedie(ldates,60, 1.5)
-rtweedie(ldates,60, 1.7)
-rTweedie(mu,p=1.5,phi=1.3)
 
-f2 <- function(x) 0.2 * x^11 * (10 * (1 - x))^6 + 10 *
-  (10 * x)^3 * (1 - x)^10
-n <- 300
-x <- runif(n)
-mu <- exp(f2(x)/3+.1);x <- x*10 - 4
-y <- rTweedie(mu,p=1.5,phi=1.3)
-b <- gam(y~s(x,k=20),family=Tweedie(p=1.5))
-b
-plot(b) 
-
-rtweedie(20,xi=1.5,mu=1,phi=1)
 
 
 ##################################################
