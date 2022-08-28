@@ -3,17 +3,20 @@
 
 --------------------------------------------------------------------------------
 
-(Title)
+Anomalous temperatures increase occupational injuries, illnesses and their associated cost burden in Australia
 
-(Author names)
+Borg, Matthew A; Xiang, Jianjun; Anikeeva, Olga; Ostendorf, Bertram; Varghese, Blesson; Dear, Keith; Pisaniello, Dino; Hansen, Alana; Zander, Kerstin; Sim, Malcolm R; Bi, Peng
 
 --------------------------------------------------------------------------------
 
 The code:
-
-  * *data.csv* stores the daily time series data from 10 locations corresponding to regions of England and Wales in the period 1993--2006.
-  * The numbered files from *00.prepdata.R* to *05.plots.R* reproduce the results of an example with the subset of data.
+  * The numbered files from *00.MasterFile.R* to *03_AnalysisStage2.R* reproduce results of a example using the provided data
   
-These files can be downloaded after clicking on the green button *Code* at this GitHub repository.
+The data for use with this example 
+  * *brambilla.max.rda* is an external meteorological data set sourced from Brambilla et al. 2022, Data in Brief
+  * *pop.rda* is the study data set of Australian worker population counts in Adelaide, Brisbane, Darwin, Hobart, Melbourne, Perth and Sydney, sourced from the Australian Bureau of Statistics (ABS). This includes estimates of the number of indoor and outdoor workers based on the ABS Census data.
+  * *public.holidays.rda* is the study list of Australian public holidays from 2004 to 2019
+  * *school.holidays.rda* is the study list of Australian school holidays from 2004 to 2021
+  * A simulated claims data set is created in file "01_DataPrep.R"
 
-(Template baesd from Gasparrini EHP 2015)
+These files can be downloaded after clicking on the green button *Code* at this GitHub repository.
