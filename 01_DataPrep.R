@@ -1,4 +1,30 @@
 ##################################################
+### Load packages
+##################################################
+
+# Data manipulation
+library(readxl) # Read Excel files (read_excel)
+library(data.table) # data.tables. This is used extensively in the subsequent files
+library(HeatStress) # WBGT calculations # install.packages("devtools"); devtools::install_github("anacv/HeatStress")
+library(lubridate) # Date manipulation
+library(stringr) # String commands
+library(zoo) # rollapply()
+
+# Statistical analysis
+library(mgcv) # Generalized additive models
+library(dlnm) # Distributed lag non-linear models
+library(splines) # Splines
+library(mixmeta) # Multivariate meta-analysis
+library(FluMoDL) # Compute attributable risk
+library(statmod) # Tweedie distibution
+library(tweedie) # Estimate Tweedie shape parameter
+
+# Graphing
+library(pryr) # %<a-%
+
+
+
+##################################################
 ### Prepare meteorological data and save as .rda file
 ###   This step is already done for you and is commented out
 ###   However, the code is included to demonstrate how the original data was extracted and edited
@@ -52,7 +78,7 @@
 ## Create randomly-generated claims data with Poisson and Tweedie assumed distributions for number of OIIs (claims) and total costs, respectively
 ## This simulated data has no relationship to any predictor variables
 no.models <- 4 # 2 cities (Melbourne and Sydney) and their indoor/outdoor combinations
-set.seed(3)
+set.seed(7)
 dates <- rep(seq(as_date("2011-01-01"), as_date("2015-12-31"), 1),each=no.models)
 ldates <- length(dates)/no.models
 claims <- data.table(
@@ -60,8 +86,9 @@ claims <- data.table(
   City = rep(c('Melbourne','Melbourne','Sydney','Sydney'),ldates),
   outin = rep(c('Indoors','Outdoors'),ldates*2),
   'Number of OIIs' = c(rpois(ldates,60), rpois(ldates,22), rpois(ldates,145), rpois(ldates,50)), # Number of OIIs
-  'Total costs' = c(rTweedie(ldates, p=1.5, phi=8), rTweedie(ldates, p=1.7, phi=9), rTweedie(ldates, p=1.4, phi=11), rTweedie(ldates, p=1.6, phi=7)) # Total costs
-) # in rTweedie, p is shape parameter, phi is dispersion parameter
+  'Total costs' = c(rtweedie(ldates, xi=1.5, mu=240, phi=8), rtweedie(ldates, xi=1.7, mu=85, phi=9),
+                    rtweedie(ldates, xi=1.4, mu=515, phi=11), rtweedie(ldates, xi=1.6, mu=200, phi=7)) # Total costs
+)
 
 # By variables for commands
 by.vars <- c("Date","City","outin")
@@ -98,8 +125,14 @@ length.ds.stratum <- length(ds.stratum)
 
 
 ##################################################
-### Day of the week variables
+### Time variables
 ##################################################
+
+## Financial year (July to June in Australia)
+daily.ds[, FYear := fifelse(Month <= 6, Year-1, Year)]
+
+## Month as a factor variable
+daily.ds[,month := factor(Month, labels=c("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"))]
 
 ## Day of the week variables (one with all categories, rest are binary variables per day
 daily.ds[, dow:=weekdays(Date)]
@@ -111,14 +144,8 @@ daily.ds[, Fri:=fifelse(str_detect(dow,'Fri'), 1, 0)]
 daily.ds[, Sat:=fifelse(str_detect(dow,'Sat'), 1, 0)]
 daily.ds[, Sun:=fifelse(str_detect(dow,'Sun'), 1, 0)]
 
-
-
-##################################################
-### Public holiday variables
-##################################################
-
-## Format public holidays
-daily.ds[, public.hol := factor(phol, levels=c(0,1), labels=c('No','Yes'))] # make phol a factor
+## Format public holidays into a factor
+daily.ds[, public.hol := factor(phol, levels=c(0,1), labels=c('No','Yes'))]
 
 ## Special holidays
 daily.ds[, shol:=0] # Default value for special holidays
@@ -131,6 +158,13 @@ daily.ds[City=='Sydney' & str_detect(`Public holiday`, 'Australia Day'), shol:=6
 # daily.ds[City=='Adelaide' & Year==2008 & Month==6 & Day %in% c(24:30), shol:=7] # Adelaide period of 24th Tue - 30th Mon Jun 08. Not relevant for this example
 daily.ds[, shol := factor(shol, labels=c('No','Xmas period','NYE','NYD','2-4 Jan','Australia Day'))] # Make sphol an unordered factor
 
-### 1st day of the month, excluding New Year's Day
+## 1st day of the month, excluding New Year's Day
 daily.ds[, day1 := as.factor(fifelse(Day==1 & Month!=1, 'Yes','No'))]
 
+## Numeric date for gam()
+daily.ds[, date := as.numeric(Date)]
+
+
+
+######################### END ############################
+######################### END ############################

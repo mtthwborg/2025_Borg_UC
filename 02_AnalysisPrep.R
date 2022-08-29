@@ -1,28 +1,9 @@
 ##################################################
-### Load packages
-##################################################
-
-# Data manipulation
-library(readxl) # Read Excel files (read_excel)
-library(data.table) # data.tables
-library(HeatStress) # WBGT calculations # install.packages("devtools"); devtools::install_github("anacv/HeatStress")
-library(lubridate) # Date manipulation
-library(stringr) # String commands
-
-# Statistical analysis
-library(mgcv) # Generalized additive models
-library(dlnm) # Distributed lag non-linear models
-library(mixmeta) # Multivariate meta-analysis
-library(FluMoDL) # attrdl function for computing attributable risk measures
-
-
-
-##################################################
 ### ADJUST THESE PARAMETERS TO ADJUST STAGE 1 (AND 2 INDIRECTLY)
 ##################################################
 
 ## Outcome variable
-outcome.var <- 'Number of OIIs' # 'Number of illnesses' "Total costs (000s)"
+outcome.var <- 'Total costs' # "Number of illnesses" or "Total costs"
 
 ## Exposure variable
 exposure.var <- 'Maximum WBGT' 
@@ -77,9 +58,9 @@ distribution.choice <- 'auto2' # 'auto' 'quasipoisson' 'Tweedie' # if use costs 
 ##################################################
 
 ## Centering percentile
-# cenpen <- NULL # Default, use minimum OII percentile as per Martinez-Solanas 2018. Commonly selects 1%
+# cenpen <- NULL # Default, use minimum OII percentile
 # cenpen <- 50 # Median
-cenpen <- 'mean' # 'ehf' 'mean'
+cenpen <- 'mean' # 'mean'
 cenpen.minmax <- c(10,90) # max and min value for cenpen. Ignored if cenpen set manually # c(10,90) # c(25,75)
 
 
@@ -109,6 +90,19 @@ rr.yaxis <- 'auto'
 bigvar.yaxis <- c(-15,60)
 bigvarby <- 15
 oer.yaxis <- seq(0.9,1.5,by=0.1)
+
+
+
+##################################################
+### Loop to run 03_AnalysisStage1.r and 04_AnalysisStage2.r for both outcome variables
+### Alternatively, can change the outcome variable (outcome.var) manually above and re-run analysis
+##################################################
+
+for (outcome.var in c('Number of OIIs',"Total costs")) { 
+  source('03_AnalysisStage1.r')
+  source('04_AnalysisStage2.r')
+  gc()
+}
 
 
 
