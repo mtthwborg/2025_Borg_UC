@@ -12,14 +12,14 @@ exposure.var <- 'Maximum WBGT'
 ### Model parameters
 
 ## Exposure parameters
-espline <- 'ns'
-eknots <- 0.5 # c(1/3, 2/3) 0.5 c(0.1,0.9)  # knot locations for exposure variable as quantiles
-edf <- length(eknots) + 1 # number of coefficients
+espline <- 'ns' # For use with splines package as part of dlnm
+eknots <- 0.5 # Knot locations for exposure variable as quantiles. Can also be a vector such as c(0.1,0.9)
+edf <- length(eknots) + 1 # Number of coefficients
 
 ## Lag parameters
-lspline <- 'ns'
-lmax <- 20 # 7 # 20 # Martinez-Solanas and Hira used different value for Stage 2. Unsure why. Gasparrani used 10 in both Stage 1 and 2. I've removed lag2
-no.lknots <- 1 # ignored if lspline = 'integer'(unconstrained)
+lspline <- 'ns' # For use with splines package as part of dlnm
+lmax <- 20 # Duration of lag period (days)
+no.lknots <- 1 # Ignored if lspline = 'integer'(unconstrained)
 
 if(lspline=='integer') { # unconstrained dlnm, 1 parameter per lag
   li_arglag <- list(fun=lspline) # knots not useable

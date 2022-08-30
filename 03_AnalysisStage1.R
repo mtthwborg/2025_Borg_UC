@@ -5,12 +5,12 @@
 ##################################################
 
 # Type of outcome
-if (str_detect(outcome.var,'claims') | str_detect(outcome.var,'injur') | str_detect(outcome.var,'disease') | str_detect(outcome.var,'llness') | str_detect(outcome.var,'OII')) {
+if (str_detect(outcome.var, paste(c('claims','injur','disease','llness','OII'), collapse="|"))) {
   type.outcome <- 'oi' # Injury and/or illness (disease or condition)
 } else {
   type.outcome <- 'cost' # Costs
 }
-
+ 
 # Outcome distribution
 if (distribution.choice %in% c('auto','auto2','automatic','default',NULL)) {
   if (type.outcome=='oi') { # if number of claims/injuries/diseases
