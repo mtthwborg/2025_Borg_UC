@@ -98,13 +98,25 @@ by.vars3 <- by.vars[!by.vars == 'Date']
 
 
 ##################################################
+### Make public holiday data long
+##################################################
+
+load(file='Public holidays.rda') 
+public.holidays <- melt(public.hols, id.vars=c('Date','Public holiday'),
+                        measure.vars=c('Adelaide','Brisbane','Canberra','Darwin','Hobart','Melbourne','Perth','Sydney'),
+                        variable.name='City', value.name='phol')
+public.holidays[, Date:=as.Date(Date)]
+
+
+
+##################################################
 ### Merge data sets together
 ##################################################
 
 load(file='brambilla.max.rda') # Climate data
-load(file='public.holidays.rda') 
 load(file='school.holidays.rda')
 load(file='pop.rda') # Worker's population using ABS data. Due to estimating indoor/outdoor proportions, n can have decimal places
+
 
 daily <- merge(merge(merge(claims, brambilla.max, by=c('Date','City')),
                public.holidays[!is.na(phol)], by=c('Date','City'), all.x=T),
