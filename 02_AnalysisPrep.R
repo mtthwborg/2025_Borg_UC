@@ -98,7 +98,9 @@ oer.yaxis <- seq(0.9,1.5,by=0.1)
 ### Alternatively, can change the outcome variable (outcome.var) manually above and re-run analysis
 ##################################################
 
-for (outcome.var in c('Number of OIIs',"Total costs")) { 
+dir.create('Results') # Create folder to store result
+
+for (outcome.var in c('Number of OIIs',"Total costs","Costs per OII")) { 
   source('03_AnalysisStage1.r')
   source('04_AnalysisStage2.r')
   gc()

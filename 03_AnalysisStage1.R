@@ -1,11 +1,10 @@
 
-
 ##################################################
 ### Preparing for model, based on parameters used in MasterFile
 ##################################################
 
 # Type of outcome
-if (str_detect(outcome.var, paste(c('claims','injur','disease','llness','OII'), collapse="|"))) {
+if (str_detect(outcome.var, paste(c('claims','injur','disease','llness','OIIs'), collapse="|"))) {
   type.outcome <- 'oi' # Injury and/or illness (disease or condition)
 } else {
   type.outcome <- 'cost' # Costs
@@ -72,7 +71,7 @@ bigvaryaxis <-c(-15,60)  # bigvar.yaxis
 ### Create folders to store results
 ##################################################
 
-base <- paste0(outcome.var, ' ', exposure.var)
+base <- paste0('Results/',outcome.var, ' ', exposure.var)
 dir.create(base) # Warning if exists (doesn't replace)
 
 # folder <- paste0(base, '/')
@@ -114,7 +113,6 @@ names(vcov) <- ds.stratum
 
 # Tweedie max shape parameter values (if Tweedie distribution used)
 m.tweedie.shape <- matrix(NA, length.ds.stratum, 1, dimnames=list(ds.stratum)) # matrix of NAs, with a column to denote optimised shape parameter
-# m.tweedie.shape <- matrix(NA, length.ds.stratum,3, dimnames=list(ds.stratum)) # matrix of NAs, with columns to dneote optimised shape parameters and their 95% CI
 
 # List objects
 temps <- outcomes <- model <- model.omit <- model2 <- m.coef <- res <- model.checks <- check <- model.checks.month <- model.checks.week <- check.res.coef <- check.res.coef.sig <- exposure.rr.s1 <- red <- list() #  Model, residuals, residual length + plots and earity
@@ -188,7 +186,7 @@ for(i in ds.stratum) {
     .m.se <- .glm.coef[,2]
     .m.t <- .glm.coef[,3]
     .m.p <- .glm.coef[,4]
-    m.r2[i,] <- 1 - model[[i]]$deviance/model[[i]]$null.deviance # ?Nagelekre R&2
+    m.r2[i,] <- 1 - model[[i]]$deviance/model[[i]]$null.deviance
   }
   
   # Save coefficients
@@ -222,11 +220,7 @@ for(i in ds.stratum) {
     m.aic[i,] <- AIC(model[[i]]) # model[[i]]$aic is identical
   }
   m.devexp[i,] <- (model[[i]]$null.deviance - model[[i]]$deviance) / model[[i]]$null.deviance # deviance explained
-  m.dispersion[i,] <- sum(residuals(model[[i]], type="pearson")^2, na.rm=T)/df.residual(model[[i]]) # summary(model[[i]])[["dispersion"]]
-  # for(i in ds.stratum) { # chi-square test for over-dispersion
-  #   print(c(i, round(sum(residuals(model[[i]], type="pearson")^2, na.rm=T)/df.residual(model[[i]]),3),
-  #           round(pchisq(sum(residuals(model[[i]], type="pearson")^2, na.rm=T), df.residual(model[[i]]), lower.tail=F),3)))
-  # }
+  m.dispersion[i,] <- sum(residuals(model[[i]], type="pearson")^2, na.rm=T)/df.residual(model[[i]])
   
   # Sum (accumulate) effects of all lags in order to eliminate one dimension of the association
   # Predicted effects: extract parameters from model corresponding to .cb variables through functions coef and vcov
@@ -258,11 +252,11 @@ for(i in ds.stratum) {
   exposure.rr.s1[[i]]$temp <- red[[i]]$predvar # = .pred1$predvar
   
   if(any(str_detect(names(red[[i]]), 'RRfit'))) { # default dlnm behaviour for log-link
-    exposure.rr.s1[[i]]$RRfit  <- red[[i]]$RRfit # already %, do not need to convert like in supp. Replaced RRfit/low/high with fit/low/high. Crosspred does output se, ?can manully calculate robust SE
+    exposure.rr.s1[[i]]$RRfit  <- red[[i]]$RRfit 
     exposure.rr.s1[[i]]$RRlow <- red[[i]]$RRlow
     exposure.rr.s1[[i]]$RRhigh <- red[[i]]$RRhigh
   }  else if(any(str_detect(names(red[[i]]), 'fit'))) { # if Tweedie glm, which outputs a log-link value not recognised by dlnm
-    exposure.rr.s1[[i]]$RRfit  <- exp(red[[i]]$fit) # already %, do not need to convert like in supp. Replaced RRfit/low/high with fit/low/high. Crosspred does output se, ?can manully calculate robust SE
+    exposure.rr.s1[[i]]$RRfit  <- exp(red[[i]]$fit)
     exposure.rr.s1[[i]]$RRlow <- exp(red[[i]]$low)
     exposure.rr.s1[[i]]$RRhigh <- exp(red[[i]]$high)
   } 
@@ -294,7 +288,6 @@ for(i in ds.stratum) {
   .lines # insert lines
 } 
 proc.time()[3]-time
-# traceback()
 
 
 

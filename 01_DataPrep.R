@@ -89,6 +89,7 @@ claims <- data.table(
   'Total costs' = c(rtweedie(ldates, xi=1.5, mu=240, phi=8), rtweedie(ldates, xi=1.7, mu=85, phi=9),
                     rtweedie(ldates, xi=1.4, mu=515, phi=11), rtweedie(ldates, xi=1.6, mu=200, phi=7)) # Total costs
 )
+claims[,'Costs per OII':=get('Total costs')/get('Number of OIIs')] # Costs per OII, should you wish to model this
 
 # By variables for commands
 by.vars <- c("Date","City","outin")
@@ -165,10 +166,10 @@ daily.ds[Month==12 & Day %in% c(23:30), shol:=1] # Christmas break
 daily.ds[Month==12 & Day==31, shol:=2] # NYE
 daily.ds[Month==1 & Day==1, shol:=3] # NYD
 daily.ds[Month==1 & Day %in% c(2:4), shol:=4] # 2nd to 4th January
-# daily.ds[City=='Brisbane' & str_detect(`Public holiday`, 'Royal Queensland Show') | str_detect(`Public holiday`, 'G20 Leaders'), shol:=5] # Royal Queensland Show and G20 Summit, only affect Brisbane.Not relevant for this example
-daily.ds[City=='Sydney' & str_detect(`Public holiday`, 'Australia Day'), shol:=6] # Australia Day has a public celebration at the Sydney Opera House
-# daily.ds[City=='Adelaide' & Year==2008 & Month==6 & Day %in% c(24:30), shol:=7] # Adelaide period of 24th Tue - 30th Mon Jun 08. Not relevant for this example
-daily.ds[, shol := factor(shol, labels=c('No','Xmas period','NYE','NYD','2-4 Jan','Australia Day'))] # Make sphol an unordered factor
+daily.ds[City=='Sydney' & str_detect(`Public holiday`, 'Australia Day'), shol:=5] # Australia Day has a public celebration at the Sydney Opera House
+day.before.melbourne.cup <- as.Date(c("2004-11-01","2005-10-31","2006-11-06","2007-11-05","2008-11-03","2009-11-02","2010-11-01","2011-10-31","2012-11-05","2013-11-04","2014-11-03","2015-11-02","2016-10-31","2017-11-06","2018-11-05","2019-11-04","2020-11-02","2021-11-01")) # List of days before Melboure Cup from 2004 to 2021 
+daily.ds[City=='Melbourne' & Date %in%  day.before.melbourne.cup, shol:=6] # limit results to warm season by removing outcome data during cold season. Keeps temperature data intact for lag
+daily.ds[, shol := factor(shol, labels=c('No','Xmas period','NYE','NYD','2-4 Jan','Australia Day','Day before Melbourne Cup'))] # Make sphol an unordered factor
 
 ## 1st day of the month, excluding New Year's Day
 daily.ds[, day1 := as.factor(fifelse(Day==1 & Month!=1, 'Yes','No'))]

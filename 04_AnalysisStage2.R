@@ -1,7 +1,4 @@
 
-########################################################################################################
-# SECOND-STAGE ANALYSIS: MULTIVARIATE META-ANALYSIS FOR OVERALL RESULTS
-########################################################################################################
 ##################################################
 ### Multivariate meta-analysis functions
 ##################################################
@@ -74,7 +71,7 @@ blups <- blup(mv, vcov=T) # BLUPs. Element for each stratum
 
 
 ##################################################
-### Define minimum occupational injuries values (not default, but still outputted)
+### Define minimum occupational OII values (not used in this analysis, but still calculated should you prefer this approach)
 ##################################################
 
 # Generate matrix for storing re-centred results
