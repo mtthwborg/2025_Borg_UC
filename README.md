@@ -1,5 +1,5 @@
 
-### Updated R code and sample data from Borg et al. (Journal) (Year)
+### Updated R code and sample data from Borg et al. NatComm 2022
 
 --------------------------------------------------------------------------------
 
