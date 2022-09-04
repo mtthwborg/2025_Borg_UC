@@ -1,4 +1,3 @@
-
 # Overview
 This repository contains R code and datasets that together provide a reproducible example to simulate the main methodology and results from Borg et al. 2022, *Nat. Commun.*, Anomalous temperatures increase occupational injuries, illnesses and their associated cost burden in Australia. These files can be downloaded after clicking on the green button *Code* at this GitHub repository.
 
@@ -13,14 +12,11 @@ This code was tested using the following systems:
 * Windows 10: 21H2
 
 This software uses R and was tested using R versions 4.2.0 and 4.2.1. The required packages can be installed using the code below within approximately 30 seconds:
-`install.packages(c('readxl','data.table','devtools','lubridate','stringr','zoo',
-                   'mgcv','statmod','tweedie','dlnm','mixmeta','FluMoDL'))
-devtools::install_github("anacv/HeatStress")`
+`install.packages(c('readxl','data.table','devtools','lubridate','stringr','zoo','mgcv','statmod','tweedie','dlnm','mixmeta','FluMoDL'))`
+`devtools::install_github("anacv/HeatStress")`
 
 The versions of the attached non-base packages used during testing were:
-` [1] pryr_0.1.5        tweedie_2.3.5     statmod_1.4.37    FluMoDL_0.0.3     mvmeta_1.0.3      mixmeta_1.2.0    
- [7] dlnm_2.4.7        mgcv_1.8-40       nlme_3.1-159      zoo_1.8-10        stringr_1.4.1     lubridate_1.8.0  
-[13] HeatStress_1.0.7  magrittr_2.0.3    data.table_1.14.2 readxl_1.4.1`
+` pryr_0.1.5 tweedie_2.3.5 statmod_1.4.37 FluMoDL_0.0.3 mvmeta_1.0.3 mixmeta_1.2.0 dlnm_2.4.7 mgcv_1.8-40 nlme_3.1-159 zoo_1.8-10 stringr_1.4.1 lubridate_1.8.0 HeatStress_1.0.7 magrittr_2.0.3 data.table_1.14.2 readxl_1.4.1`
 
 
 # Files
