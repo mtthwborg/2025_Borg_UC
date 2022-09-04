@@ -127,11 +127,7 @@ gc()
 for(i in ds.stratum) {
   print(paste('Stage 1 model:',i))
   .ds <- daily.ds[stratum==i] # dataset for each unique value #
-
   .name <- unique(.ds$stratum) # names with all of a, b and c together
-  .folder <- paste0(s1results,.name)
-  .folders <- paste0(.folder,'/')
-  dir.create(.folder) # Warning if exists (doesn't replace)
   
   # Dependent and independent variables using .ds
   .outcome <- outcomes[[i]] <- .ds[,get(outcome.var)]
@@ -224,22 +220,6 @@ for(i in ds.stratum) {
   # Sum (accumulate) effects of all lags in order to eliminate one dimension of the association
   # Predicted effects: extract parameters from model corresponding to .cb variables through functions coef and vcov
   .pred1 <- crosspred(basis=.cb, model=model[[i]], cen=.cen, model.link='log') # must set log for tweedie package 
-
-  # Plot exposure-lag-response relationship
-  png(file = paste0(.folders, .name,', e-l-r relationship.png')) # plot location
-  plot(.pred1, "3d", xlab=exposure.var, ylab="Lag", zlab="Relative risk", main=paste0("e-l-r relationship: ",.name))
-  dev.off()
-  
-  # Plot exposure-lag-response relationship as contour plot
-  png(file = paste0(.folders, .name,', e-l-r contour plot.png'))
-  plot(.pred1, "contour", xlab=exposure.var, ylab="Lag", main=paste0("e-l-r relationship: ",.name))
-  dev.off()
-  
-  # Plot exposure-response relationship at day 0 (no lag)
-  png(file = paste0(.folders, .name,', e-r relationship day 0.png'))
-  plot(.pred1, "slices", lag=0, lwd=1, col=2,  xlab=paste(exposure.var,'?(C)'), 
-       ylab="Relative risk", main= paste0("Exposure-response relationship at day 0: ", .name)) 
-  dev.off()
   
   # Overall cumulative summary for main model
   red[[i]] <- crossreduce(.cb, model[[i]], cen=.cen, model.link='log') # reduce exposure-lag-response association to overall cumulative exposure-response association, using mean

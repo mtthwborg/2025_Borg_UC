@@ -2,9 +2,7 @@
 ### Load packages
 ##################################################
 
-# Tested and validated with R 4.2.0 and 4.2.1 on both Apple M1 Max (Darwin Kernel Version 21.6.0) and Windows 10 (x86_64-w64-mingw32/x64)
-# The versions for each package are included as comments next to their name
-# This code may not work with some older versions of R and the packages below
+# The versions for each package used in testing are included as comments next to their name
 
 # Data manipulation
 library(readxl) # Read Excel files (read_excel). Version 1.4.1
@@ -15,13 +13,13 @@ library(stringr) # String commands. Version 1.4.1
 library(zoo) # rollapply(). Version 1.8-10
 
 # Statistical analysis
+library(statmod) # Tweedie distribution. Version 1.4.37
+library(tweedie) # Estimate Tweedie shape parameter. Version 2.3.5
 library(mgcv) # Generalized additive models. Version 1.8-40
 library(dlnm) # Distributed lag non-linear models. Version 2.4.7
 library(splines) # Splines. Version 4.2.1
 library(mixmeta) # Multivariate meta-analysis. Version 1.2.0
 library(FluMoDL) # Compute attributable risk. Version 0.0.3
-library(statmod) # Tweedie distribution. Version 1.4.37
-library(tweedie) # Estimate Tweedie shape parameter. Version 2.3.5
 
 # Graphing
 library(pryr) # %<a-%

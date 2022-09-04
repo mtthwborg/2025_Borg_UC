@@ -107,8 +107,9 @@ for (outcome.var in c('Number of OIIs',"Total costs","Costs per OII")) { # Loop 
   gc()
 }
 proc.time()[3]-time # Report time taken
-# Loop time taken on Apple M1 Max (Darwin Kernel Version 21.6.0) was 30 - 35 seconds
-# Loop time taken on Windows 10 (x86_64-w64-mingw32/x64) was 30 - 35 seconds
+# Loop time taken on Apple M1 Max (Darwin Kernel Version 21.6.0) was approximately 30 to 35 seconds
+# Loop time taken on Windows 10 (x86_64-w64-mingw32/x64) was approximately 1.5 to 2.5 minutes
+
 
 
 ######################### END ############################
