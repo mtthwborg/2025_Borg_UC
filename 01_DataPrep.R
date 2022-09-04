@@ -5,21 +5,21 @@
 # The versions for each package used in testing are included as comments next to their name
 
 # Data manipulation
-library(readxl) # Read Excel files (read_excel). Version 1.4.1
-library(data.table) # data.table manipulation. Version 1.14.2
-library(HeatStress) # WBGT calculations # To install, use: install.packages("devtools"); devtools::install_github("anacv/HeatStress"). Version 1.0.7
-library(lubridate) # Date manipulation. Version 1.8.0
-library(stringr) # String commands. Version 1.4.1
-library(zoo) # rollapply(). Version 1.8-10
+library(readxl) # Read Excel files (read_excel)
+library(data.table) # data.table manipulation
+library(HeatStress) # WBGT calculations # To install, use: install.packages("devtools"); devtools::install_github("anacv/HeatStress")
+library(lubridate) # Date manipulation
+library(stringr) # String commands
+library(zoo) # rollapply()
 
 # Statistical analysis
-library(statmod) # Tweedie distribution. Version 1.4.37
-library(tweedie) # Estimate Tweedie shape parameter. Version 2.3.5
-library(mgcv) # Generalized additive models. Version 1.8-40
-library(dlnm) # Distributed lag non-linear models. Version 2.4.7
-library(splines) # Splines. Version 4.2.1
-library(mixmeta) # Multivariate meta-analysis. Version 1.2.0
-library(FluMoDL) # Compute attributable risk. Version 0.0.3
+library(statmod) # Tweedie distribution
+library(tweedie) # Estimate Tweedie shape parameter
+library(mgcv) # Generalized additive models
+library(dlnm) # Distributed lag non-linear models
+library(splines) # Splines
+library(mixmeta) # Multivariate meta-analysis
+library(FluMoDL) # Compute attributable risk
 
 # Graphing
 library(pryr) # %<a-%

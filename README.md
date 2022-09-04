@@ -1,6 +1,6 @@
 
 # Overview
-This repository contains code and datasets that together provide a reproducible example to simulate the main methodology and results from Borg et al. 2022, *Nat. Commun.*, Anomalous temperatures increase occupational injuries, illnesses and their associated cost burden in Australia. These files can be downloaded after clicking on the green button *Code* at this GitHub repository.
+This repository contains R code and datasets that together provide a reproducible example to simulate the main methodology and results from Borg et al. 2022, *Nat. Commun.*, Anomalous temperatures increase occupational injuries, illnesses and their associated cost burden in Australia. These files can be downloaded after clicking on the green button *Code* at this GitHub repository.
 
 
 # System Requirements
@@ -24,7 +24,7 @@ The versions of the attached non-base packages used during testing were:
 
 
 # Files
-This repository comes with the R project file, datasets and analysis files.
+This repository comes with the .Rproj (project) file, datasets and analysis files.
 
 ## Data
 The datasets for use with this example:
@@ -34,7 +34,7 @@ The datasets for use with this example:
   * *school.holidays.rda* is the study list of Australian school holidays from 2004 to 2023 (as a binary variable and a factor variable with levels for each school holiday period). This dataset is sourced from [https://doi.org/10.25909/6311e7b3bc760](https://adelaide.figshare.com/articles/dataset/School_holidays_in_Australian_capital_cities_from_2004_to_2023/20732173).
   * A simulated claims data set is created in file "01_DataPrep.R"
 
-*pop.rda*, *public.holidays.rda* and *school.holidays.rda* were used in the study analysis by Borg et al. 2022.
+*pop.rda*, *public.holidays.rda* and *school.holidays.rda* were also used in the main study analysis by Borg et al. 2022.
   
 ## Analysis
 The numbered code files from *01_DataPrep.R* to *04_AnalysisStage2.R* reproduce the study analysis using the aforementioned datasets. They are designed to be run in numerical order:
