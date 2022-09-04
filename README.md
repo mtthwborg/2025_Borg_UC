@@ -15,6 +15,8 @@ The numbered code files from *01_DataPrep.R* to *04_AnalysisStage2.R* reproduce 
   * *03_AnalysisStage1.R* runs the Stage 1 statistical analysis
   * *04_AnalysisStage2.R* runs the Stage 2 statistical analysis
 
+*02_AnalysisPrep.R* includes a brief loop that can run the code for both *03_AnalysisStage1.R* and *04_AnalysisStage2.R* with multiple outcome variables.
+
 The data for use with this example 
   * *brambilla.max.rda* is an external meteorological data set sourced from Brambilla et al. 2022, Data in Brief
   * *pop.rda* is the study data set of Australian worker population counts in Adelaide, Brisbane, Darwin, Hobart, Melbourne, Perth and Sydney, sourced from the Australian Bureau of Statistics (ABS). This includes estimates of the number of indoor and outdoor workers based on the ABS Census data.

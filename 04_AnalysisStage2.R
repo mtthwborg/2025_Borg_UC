@@ -288,7 +288,6 @@ arraysim <- array(NA, dim=c(length.ds.stratum, length.sim, nsim), dimnames=list(
 
 # Run loop
 gc()
-time <- proc.time()[3]
 for(i in ds.stratum){
   print(paste('Attributable risk:',i))
   
@@ -343,7 +342,6 @@ for(i in ds.stratum){
 
   totclaims[i] <- sum(.outcome, na.rm=T) # store total injuries (account for missing)
 }
-proc.time()[3]-time
 
 
 ### Attributable numbers ###

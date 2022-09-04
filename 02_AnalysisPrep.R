@@ -98,14 +98,17 @@ oer.yaxis <- seq(0.9,1.5,by=0.1)
 ### Alternatively, can change the outcome variable (outcome.var) manually above and re-run analysis
 ##################################################
 
-dir.create('Results') # Create folder to store result
+dir.create('Results') # Create folder to store results
 
-for (outcome.var in c('Number of OIIs',"Total costs","Costs per OII")) { 
+time <- proc.time()[3] # Record time
+for (outcome.var in c('Number of OIIs',"Total costs","Costs per OII")) { # Loop analysis for the two main outcome variables and also costs per OII
   source('03_AnalysisStage1.r')
   source('04_AnalysisStage2.r')
   gc()
 }
-
+proc.time()[3]-time # Report time taken
+# Loop time taken on Apple M1 Max (Darwin Kernel Version 21.6.0) was 30 - 35 seconds
+# Loop time taken on Windows 10 (x86_64-w64-mingw32/x64) was 30 - 35 seconds
 
 
 ######################### END ############################

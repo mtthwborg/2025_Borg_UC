@@ -124,7 +124,6 @@ temps <- outcomes <- model <- model.omit <- model2 <- m.coef <- res <- model.che
 ################################################################################
 
 gc()
-time <- proc.time()[3]
 for(i in ds.stratum) {
   print(paste('Stage 1 model:',i))
   .ds <- daily.ds[stratum==i] # dataset for each unique value #
@@ -287,7 +286,6 @@ for(i in ds.stratum) {
   .erplot # insert main plot additions
   .lines # insert lines
 } 
-proc.time()[3]-time
 
 
 
