@@ -1,5 +1,5 @@
 # Overview
-This repository contains R code and datasets that together provide a reproducible example to simulate the main methodology and results from Borg et al. 2022, *Nat. Commun.*, Anomalous temperatures increase occupational injuries, illnesses and their associated cost burden in Australia. These files can be downloaded after clicking on the green button *Code* at this GitHub repository.
+This repository contains R code and datasets that together provide a reproducible example to simulate the main methodology and results from Borg et al. 2022, *Environ Health Perspect.*, Anomalous temperatures increase occupational injuries, illnesses and their associated cost burden in Australia. These files can be downloaded after clicking on the green button *Code* at this GitHub repository.
 
 
 # System Requirements
@@ -36,7 +36,7 @@ The datasets for use with this example:
 ## Analysis
 The numbered code files from *01_DataPrep.R* to *04_AnalysisStage2.R* reproduce the study analysis using the aforementioned datasets. They are designed to be run in numerical order:
   * *01_DataPrep.R* sets up the packages and data sets. It creates a simulated (fake) dataset to represent the number of claims and their associated total costs.
-  * *02_AnalysisPrep.R* prepares the parameters for statistical analysis. The default parameters replicate those used for the main analysis with total costs as the outcome variable and wet bulb globe temperature as the exposure variable. The parameters can be changed to simulate many of the supplementary analyses.
+  * *02_AnalysisPrep.R* prepares the parameters for statistical analysis. The default parameters replicate those used for the main analysis with total costs as the outcome variable and daily maximum wet bulb globe temperature as the exposure variable. The parameters can be changed to simulate many of the supplementary analyses.
   * *03_AnalysisStage1.R* runs the Stage 1 statistical analysis, the individual models prior to multivariate meta-analysis.
   * *04_AnalysisStage2.R* runs the Stage 2 statistical analysis. This includes the multivariate meta-analysis, refitting the Stage 1 models with the best linear unbiased predictors, and using the refitted models to generate the main study results.
 
