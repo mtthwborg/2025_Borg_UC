@@ -57,7 +57,7 @@ The files generated are:
   * *Tweedie shape parameters.csv*. This includes the Tweedie shape parameters from the outcome variables. It is only generated if the outcome has a Tweedie distribution. It is included in case one wishes to repeat the models without needing to re-estimate the shape parameters, which can be time-consuming with large datasets.
 
 ## Stage 2
-A folder will be created to store results representing each model . Three graphs will be created here to describe the exposure-lag-response relationships prior to multivariate meta-analysis. These 
+A folder will be created to store results representing each model. Three graphs will be created here to describe the exposure-lag-response relationships prior to multivariate meta-analysis. These 
 The files generated are:
   * *MM tests.csv*. This contains the multivariate extension of the Cochran Q test and the I^2^ statistic for the multivariate meta-analysis.
   * *RR (95% CI).csv*. Generates the relative risk and 95% confidence intervals used to generate the overall exposure-response relationship graph.
