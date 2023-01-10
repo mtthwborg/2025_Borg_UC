@@ -25,7 +25,7 @@ This repository comes with the .Rproj (project) file, datasets and analysis file
 
 ## Data
 The datasets for use with this example:
-  * *brambilla.max.rda* is a derived meteorological data set sourced externally from [Brambilla et al. 2022, *Data Br.*, Hygrothermal climate analysis: An Australian dataset](https://doi.org/10.1016/j.dib.2022.108291).
+  * *brambilla.max.rda* is a derived meteorological data set sourced externally from [Brambilla et al. 2022, *Data Br.*, Hygrothermal climate analysis: An Australian dataset](https://doi.org/10.1016/j.dib.2022.108291). The code to create this dataset is included in *01_DataPrep.R*.
   * *pop.rda* is the study data set of Australian worker population counts in Adelaide, Brisbane, Darwin, Hobart, Melbourne, Perth and Sydney, sourced from the [Australian Bureau of Statistics (ABS)](https://www.abs.gov.au/statistics/labour/employment-and-unemployment/labour-force-australia/latest-release). This includes estimates of the number of indoor and outdoor workers derived/based from [ABS Census TableBuilder Basic data](https://tablebuilder.abs.gov.au/webapi/jsf/login.xhtml) as described in the methodology by Borg et al. 2022.
   * *public.holidays.rda* is the study list of Australian public holidays from 2004 to 2023. This dataset is sourced from [https://doi.org/10.25909/6311e7a0dcb3f67](https://adelaide.figshare.com/articles/dataset/Public_holidays_in_Australian_capital_cities_from_2004_to_2023/20732449).
   * *school.holidays.rda* is the study list of Australian school holidays from 2004 to 2023 (as a binary variable and a factor variable with levels for each school holiday period). This dataset is sourced from [https://doi.org/10.25909/6311e7b3bc760](https://adelaide.figshare.com/articles/dataset/School_holidays_in_Australian_capital_cities_from_2004_to_2023/20732173).
@@ -42,6 +42,7 @@ The numbered code files from *01_DataPrep.R* to *04_AnalysisStage2.R* reproduce 
 
 *02_AnalysisPrep.R* includes a brief loop that can run the code for both *03_AnalysisStage1.R* and *04_AnalysisStage2.R* with multiple outcome variables. Please run *01_DataPrep.R* and the preceding code in *02_AnalysisPrep.R* before running this loop.
 
+*heat.index2.R* calls a modified function to calculate the Heat Index. It is a modified version of weathermetrics::heat.index that (1) uses a threshold of 80 instead of 79 and (2) does not automatically round results to two decimal figures. This code was only used when calculating Heat Index, which is not part of the main analysis.
 
 # Results
 *02_AnalysisPrep.R* will create the folder in the directory to store the results from these latter two files. Within this folder, *03_AnalysisStage1.R* will create an additional folder with the names of the outcome variable and exposure variable, as well as an additional folder called "Stage 1" inside this to replace the results that it generates. *04_AnalysisStage2.R* will create an additional folder named "Stage 2" to store its results.
