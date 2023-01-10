@@ -32,16 +32,16 @@ library(pryr) # %<a-%
 ###   However, the code is included to demonstrate how the original data was extracted and edited
 ##################################################
 
-# # Source: Brambilla et al. 2022, Data in Brief, https://doi.org/10.1016/j.dib.2022.108291
-# 
+# Source: Brambilla et al. 2022, Data in Brief, https://doi.org/10.1016/j.dib.2022.108291
+
 # ## Extract data
-# brambilla.loc <- paste0("your_directory_with_the_files") # Location of Brambilla et al. 2022 Appendix 1 Climate_files 
+# brambilla.loc <- paste0("your_directory_with_the_files") # Location of Brambilla et al. 2022 Appendix 1 Climate_files
 # brambilla.data <- list() # Save data in list
 # for(a in c('Melbourne','Sydney')) {
 #   for(b in 21:25) { # 2021-2015
 #     if (a=='Sydney') {brambilla.data[[paste0(a,b)]] <- cbind('City'=a, 'Year'=b+1990, read_excel(paste0(brambilla.loc,'5_Sydney_Climatedata.xlsx'), sheet=b)[c(1:6,8:10)])}
 #     else if (a=='Melbourne') {brambilla.data[[paste0(a,b)]] <- cbind('City'=a, 'Year'=b+1990, read_excel(paste0(brambilla.loc,'6_Melbourne_Climatedata.xlsx'), sheet=b)[c(1:6,8:10)])}
-#   } 
+#   }
 # }
 # 
 # brambilla <- do.call(rbind.data.frame, brambilla.data) # Combine list into a data frame
@@ -50,7 +50,7 @@ library(pryr) # %<a-%
 # 
 # ## Obtain daily metrics at time of maximum temperature using BoM classification
 # brambilla[,predate:=ISOdate(Year, Month, Day, Hour)] # Date
-# brambilla[,Date:=as.Date(predate-9*3600+1)] # Bureau of Meteorology (BoM) measuring period for maximum temperature is 9am on same day to 9am next day, date_bom treats 9am as "midnight" starting the measuring period
+# brambilla[,Date:=as.Date(predate-9*3600+1)] # Bureau of Meteorology (BoM) measuring period for maximum temperature is 9am on same day to 9am next day
 # brambilla.max <- setDT(brambilla)[Date!='2010-12-31', .SD[which.max(temp)], by=c('Date','City')] # Metrics at time of maximum temperature
 # 
 # ## Calculate WBGT. (Saturation) vapor pressure and dew point temperature calculations use Buck's 1996 equation and air P
@@ -67,6 +67,11 @@ library(pryr) # %<a-%
 # brambilla.max$wbgtl <- with(brambilla.max, ifelse(City=='Melbourne', wbgt.Liljegren(tas=temp, dewp=dewpt, wind=ws, radiation=sr, lon=144.84, lat=-37.67, dates=Date, hour=T)[["data"]],
 #                                                   wbgt.Liljegren(tas=temp, dewp=dewpt, wind=ws, radiation=sr, lon=151.18, lat=-33.95, dates=Date, hour=T)[["data"]])) # Outdoor WBGT
 # brambilla.max[,':='(predate=NULL,dnr=NULL,dhr=NULL,ap=NULL,ef=NULL,svp=NULL,s=NULL)] # Removing unneeded variables calculation, retaining humidity metrics for sensitivity analyses and components of WBGT
+# 
+# ## Other apparent temperature metrics
+# source('heat.index2.r') # weathermetrics::heat.index modified with a 79 threshold changed to 80 and no rounding
+# brambilla.max[,heat.index := heat.index2(t=temp, rh=rh, temperature.metric='celsius', round=9999999),] # Heat index. Use self-code that allows rounding to >2 digits
+# brambilla.max[,humidex := temp + 5/9 * (vp - 10)] # Humidex
 # 
 # ## Save daily maximum temperature metrics
 # save(brambilla.max, file='brambilla.max.rda')
