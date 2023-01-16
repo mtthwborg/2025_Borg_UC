@@ -15,8 +15,6 @@ if (distribution.choice %in% c('auto','auto2','automatic','default',NULL)) {
   if (type.outcome=='oi') { # if number of claims/injuries/diseases
     if (distribution.choice=='auto2') {distribution <- 'poisson'}
     else {distribution <- 'quasipoisson'}
-  } else if (type.outcome=='non-0') { # if only include clams with costs
-    distribution <- Gamma(link = log)
   } else if (type.outcome=='cost') { # if cost
     distribution <- tweedie(var.power=1.7, link.power=0) # parameters restimated later; initial choice makes no difference
     tweedie.profile. <- var.power <- list() # if tweedie distribution, create tweedie.profile

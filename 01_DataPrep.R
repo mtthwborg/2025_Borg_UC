@@ -131,7 +131,7 @@ daily <- merge(merge(merge(claims, brambilla.max, by=c('Date','City')),
                 school.holidays, by=c('Date','City'), all.x=T)
 daily[is.na(phol), phol := 0] # Replace NA in public holidays with 0
 
-# Merge worker's month.y population
+# Merge worker's monthly population
 daily.ds <- merge(daily, pop, by=c("Year","Month","City","outin"), all.x=T)
 
 # Create WBGT based on indoors or outdoors
