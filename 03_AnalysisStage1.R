@@ -196,7 +196,7 @@ for(i in ds.stratum) {
   if(modeltype %in% c('a','gam','GAM')) {
     m.coef[[i]][str_detect(Parameter,'\\('), ':='(`t-value`=NA, `p-value`=NA)] # t-values and p-values not calculated for gam smoothers, so set NA instead of repeat for them
   }
-  summary(model[[i]])
+  
   if(distribution[1]=='quasipoisson') { #[1] is to avoid warnings from using multiple elements
     if(modeltype %in% c('a','gam','GAM')) {
       m.aic[i,] <- fqaic.fn(model[[i]], gam=T) # if gam, use gam option. CURRENTLY REULSTS IN INF. Not sure (I suspect not) if it applies corrected AIC, but also not sure if GAM AIC works on it

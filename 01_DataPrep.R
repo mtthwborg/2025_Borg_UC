@@ -38,7 +38,7 @@ library(pryr) # %<a-%
 # brambilla.loc <- paste0("your_directory_with_the_files") # Location of Brambilla et al. 2022 Appendix 1 Climate_files
 # brambilla.data <- list() # Save data in list
 # for(a in c('Melbourne','Sydney')) {
-#   for(b in 21:25) { # 2021-2015
+#   for(b in 21:25) { # 2011-2015
 #     if (a=='Sydney') {brambilla.data[[paste0(a,b)]] <- cbind('City'=a, 'Year'=b+1990, read_excel(paste0(brambilla.loc,'5_Sydney_Climatedata.xlsx'), sheet=b)[c(1:6,8:10)])}
 #     else if (a=='Melbourne') {brambilla.data[[paste0(a,b)]] <- cbind('City'=a, 'Year'=b+1990, read_excel(paste0(brambilla.loc,'6_Melbourne_Climatedata.xlsx'), sheet=b)[c(1:6,8:10)])}
 #   }
