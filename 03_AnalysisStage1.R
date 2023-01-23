@@ -199,7 +199,7 @@ for(i in ds.stratum) {
   
   if(distribution[1]=='quasipoisson') { #[1] is to avoid warnings from using multiple elements
     if(modeltype %in% c('a','gam','GAM')) {
-      m.aic[i,] <- fqaic.fn(model[[i]], gam=T) # if gam, use gam option. CURRENTLY REULSTS IN INF. Not sure (I suspect not) if it applies corrected AIC, but also not sure if GAM AIC works on it
+      m.aic[i,] <- fqaic.fn(model[[i]], gam=T) # if gam, use gam option
     } else {
       m.aic[i,] <- fqaic.fn(model[[i]])
     } 
@@ -272,7 +272,6 @@ for(i in ds.stratum) {
 ################################################################################
 
 # Combine number of outcomes, DLNM coefficients, AIC and dispersion parameter, including totals for outcomes and AIC
-
 m1.results <- rbind(cbind(no.outcome, coef, m.aic,  m.dispersion), c(sum(no.outcome),rep(NA, ncol(coef)),sum(m.aic), NA))
 colnames(m1.results) <- c('Number of outcomes',colnames(coef),'AIC','Dispersion parameter')
 write.csv(m1.results, file=paste0(s1results,'Reduced coef and model fit.csv'), na='', row.names=T) # output AIC per model and its sum
