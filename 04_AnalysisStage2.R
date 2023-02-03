@@ -301,7 +301,7 @@ for(i in ds.stratum){
     .cen <- exposure.mean[i] # mean
   }
   
-  # Derive cross-basis. NB: centering point different than original choice of 75th (i see no difference)
+  # Derive cross-basis
   .cb <- crossbasis(temps[[i]], argvar=list(fun=espline, knots=quantile(temps[[i]], eknots, na.rm=T)), lag=lmax, arglag=li_arglag)
   
   # Compute attributable numbers with reduced coefficients, based on centering value
