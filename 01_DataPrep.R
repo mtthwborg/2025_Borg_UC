@@ -69,6 +69,7 @@ library(pryr) # %<a-%
 # brambilla.max[,':='(predate=NULL,dnr=NULL,dhr=NULL,ap=NULL,ef=NULL,svp=NULL,s=NULL)] # Removing unneeded variables calculation, retaining humidity metrics for sensitivity analyses and components of WBGT
 # 
 # ## Other apparent temperature metrics
+# library(weathermetrics)
 # source('heat.index2.r') # weathermetrics::heat.index modified with a 79 threshold changed to 80 and no rounding
 # brambilla.max[,heat.index := heat.index2(t=temp, rh=rh, temperature.metric='celsius', round=9999999),] # Heat index. Use self-code that allows rounding to >2 digits
 # brambilla.max[,humidex := temp + 5/9 * (vp - 10)] # Humidex
