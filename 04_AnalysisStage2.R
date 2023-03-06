@@ -108,7 +108,7 @@ mvpred <- predict.mixmeta(mv, datanew, vcov=T, format="list") # Results are iden
 bvar <- crossbasis(exposure.country.mean, argvar=list(fun=espline, knots=exposure.country.mean[paste0(eknots*100)]), arglag=li_arglag) # crossbasis
 bvar1 <- bvar%*%mvpred$fit # multiply coefficients for combined effect
 bvar1 <- bvar1[order(bvar1[,1]),, drop=F] # sort in ascending order (not required, but easier for visualisation
-bvar1 <- bvar1[between(rownames(bvar1), cenpen.minmax[1], cenpen.minmax[2]),] # exclude percentiles outside range for selecting optimal percentile, converts to vector
+bvar1 <- bvar1[between(as.numeric(rownames(bvar1)), cenpen.minmax[1], cenpen.minmax[2]),] # exclude percentiles outside range for selecting optimal percentile, converts to vector
 cenindcountry <- as.numeric(names(bvar1[which.min(bvar1)])) # exposure percentile with lowest incidence of outcome (optimal percentile)
 
 # Define centering percentile for country, using either median or above exposure percentile 
