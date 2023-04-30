@@ -76,7 +76,7 @@ library(pryr) # %<a-%
 # 
 # ## Save daily maximum temperature metrics
 # save(brambilla.max, file='brambilla.max.rda')
-
+load('brambilla.max.rda')
 
 
 ##################################################
