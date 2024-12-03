@@ -1,5 +1,5 @@
 # Overview
-This repository contains R code and datasets that together provide a reproducible example to simulate the main methodology and results from Borg et al. 2023, *Environmental International*, Anomalous temperatures increase occupational injuries, illnesses and their associated cost burden in Australia. These files can be downloaded after clicking on the green button *Code* at this GitHub repository.
+This repository contains R code and datasets that together provide a reproducible example to simulate the main methodology and results from Borg et al. 2024, *Urban Climate*, Anomalous temperatures increase occupational injuries, illnesses and their associated cost burden in Australia. These files can be downloaded after clicking on the green button *Code* at this GitHub repository.
 
 
 # System Requirements
